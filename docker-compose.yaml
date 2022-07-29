@@ -31,8 +31,8 @@ services:
     # where the app Dockerfile locates, the . means current dir
     build: .
 #    command: ./bin/doorman -config=./config/config.yml -port=6000 -debug_port=6050 -etcd_endpoints=http://etcd:2379 -master_election_lock=/doorman.master -log_dir="./doorman_log_dir"  -alsologtostderr
-    volumes:
-      - .:/code
+#    volumes:
+#      - .:/code
 #    expose:
 #      - "8000"
     ports:
