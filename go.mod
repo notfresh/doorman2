@@ -1,4 +1,4 @@
-module doorman2
+module github.com/notfresh/doorman2
 
 go 1.17
 
