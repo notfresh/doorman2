@@ -15,7 +15,7 @@ services:
   #    networks:
   #    - web_network
 
-  Etcd:
+  etcd:
     image: 'bitnami/etcd:latest'
     environment:
       - ALLOW_NONE_AUTHENTICATION=yes
