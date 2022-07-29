@@ -2,7 +2,7 @@ FROM golang:1.18
 RUN mkdir /code
 COPY . /code
 WORKDIR /code
-RUN go env -w GO111MODULE="off"
+RUN go env -w GO111MODULE="on"
 #RUN go get github.com/notfresh/doorman/go/cmd/doorman
 RUN go build -o bin/doorman ./go/cmd/doorman
 ENV PORT 6000
