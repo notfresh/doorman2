@@ -8,7 +8,8 @@ RUN go build -o ./bin/doorman ./go/cmd/doorman
 RUN chmod a+x ./bin/doorman
 #RUN export PATH=$PATH:./bin
 ENV PORT 6000
-CMD ./bin/doorman -config=./config/config.yml -port=$PORT -debug_port=$(expr $PORT + 50) -etcd_endpoints=http://etcd:2379 -master_election_lock="/doorman.master" -log_dir=/doorman_log_dir  -alsologtostderr
+ENV ENPOINTS "etcd:2379,etcd:2380,etcd:2381"
+CMD ./bin/doorman -config=./config/config.yml -port=$PORT -debug_port=$(expr $PORT + 50) -etcd_endpoints=$ENPOINTS -master_election_lock="/doorman.master" -log_dir=/doorman_log_dir  -alsologtostderr
 #CMD ./endless.sh
 
 
