@@ -23,9 +23,9 @@ services:
     expose:
       - "2379"
       - "2380"
-    ports:
-      - 2379:2379
-      - 2380:2380
+#    ports:
+#      - 2379:2379
+#      - 2380:2380
     networks:
       - doorman-net
 
