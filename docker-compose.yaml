@@ -1,0 +1,71 @@
+version: "3"
+
+networks:
+  doorman-net:
+    driver: bridge
+
+services:
+
+  #  redis:
+  #    restart: always
+  #    image: redis:latest
+  #    command:  redis-server
+  #    expose:
+  #    - "6379"
+  #    networks:
+  #    - web_network
+
+  Etcd:
+    image: 'bitnami/etcd:latest'
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+    ports:
+      - 2379:2379
+      - 2380:2380
+    networks:
+      - doorman-net
+
+  doorman_master:
+    restart: always
+    # where the app Dockerfile locates, the . means current dir
+    build: .
+#    command: gunicorn -c gunicorn.py manage:app
+    volumes:
+      - .:/code
+#    expose:
+#      - "8000"
+    ports:
+      - "6000:6000"
+      - "6500:6500"
+    networks:
+      - doorman-net
+  #    depends_on:
+  #      - redis
+
+#  nginx:
+#    restart: always
+#    image: nginx:latest
+#    ports:
+#      - "80:8000"
+#      - "443:443"
+#    volumes:
+#      - ./config/nginx:/etc/nginx/conf.d
+#      - ./config/https-cert:/etc/nginx/certs
+#    depends_on:
+#      - app
+#    #    - redis
+#    networks:
+#      - web_network
+#    tty: true
+#    stdin_open: true
+
+
+
+
+
+
+
+
+
+

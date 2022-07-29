@@ -157,6 +157,7 @@ type Server struct {
 		test       *prometheus.Desc
 	}
 	test_value float64
+	pb.UnimplementedCapacityServer
 }
 
 // zx return what and int?

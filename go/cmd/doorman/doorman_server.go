@@ -17,6 +17,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/ghodss/yaml"
 	"net"
 	"net/http"
 	"os"
@@ -26,11 +27,9 @@ import (
 	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
-	"github.com/prometheus/client_golang/prometheus"
 	rpc "google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 
-	"github.com/ghodss/yaml"
 	"github.com/notfresh/doorman2/go/configuration"
 	"github.com/notfresh/doorman2/go/connection"
 	"github.com/notfresh/doorman2/go/flagenv"
@@ -39,6 +38,7 @@ import (
 	"github.com/notfresh/doorman2/go/status"
 
 	pb "github.com/notfresh/doorman2/proto/doorman"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 	_ "expvar"
 	_ "net/http/pprof"
@@ -243,7 +243,7 @@ func main() {
 	http.Handle("/", http.RedirectHandler("/debug/status", http.StatusMovedPermanently))
 	AddServer(dm)
 
-	http.Handle("/metrics", prometheus.Handler())
+	http.Handle("/metrics", promhttp.Handler())
 	log.Info(fmt.Sprintf("Server listen on port %v", *debugPort))
 	go http.ListenAndServe(fmt.Sprintf(":%v", *debugPort), nil)
 
